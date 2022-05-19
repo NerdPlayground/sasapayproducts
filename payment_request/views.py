@@ -5,14 +5,14 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.generics import GenericAPIView
 from authentication.authentication import get_client_token
-from payment_request.serializers import NumberRequestPaymentSerializer,AliasNumberRequestPaymentSerializer
+from payment_request.serializers import PhoneNumberRequestPaymentSerializer,AliasNumberRequestPaymentSerializer
 
-class NumberRequestPaymentAPIView(GenericAPIView):
-    serializer_class= NumberRequestPaymentSerializer
+class PhoneNumberRequestPaymentAPIView(GenericAPIView):
+    serializer_class= PhoneNumberRequestPaymentSerializer
 
     def post(self,request):
         data= request.data
-        serializer= NumberRequestPaymentSerializer(data=data)
+        serializer= PhoneNumberRequestPaymentSerializer(data=data)
         if serializer.is_valid():
             account_reference= data.get("AccountReference")
             merchant_code= data.get("MerchantCode")

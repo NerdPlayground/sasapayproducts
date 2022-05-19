@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-class NumberRequestPaymentSerializer(serializers.Serializer):
+class PhoneNumberRequestPaymentSerializer(serializers.Serializer):
     MerchantCode= serializers.IntegerField()
     PhoneNumber= serializers.IntegerField()
     TransactionDesc= serializers.CharField()
