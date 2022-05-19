@@ -19,3 +19,8 @@ class AliasNumberRequestPaymentSerializer(serializers.Serializer):
     Currency= serializers.CharField()
     Amount= serializers.IntegerField()
     CallBackURL= serializers.CharField()
+
+class ProcessPaymentSerializer(serializers.Serializer):
+    CheckoutRequestID= serializers.CharField()
+    MerchantCode= serializers.IntegerField()
+    VerificationCode= serializers.IntegerField()
