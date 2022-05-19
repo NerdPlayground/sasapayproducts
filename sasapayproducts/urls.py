@@ -19,5 +19,6 @@ from django.urls import path,include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("",include("payment_request.urls")),
+    path("",include("callbackurls.urls")),
     # path("",include("")),
 ]
