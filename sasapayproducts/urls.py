@@ -21,5 +21,6 @@ urlpatterns = [
     path("",include("payment_request.urls")),
     path("",include("callbackurls.urls")),
     path("",include("business_to_customer.urls")),
+    path("",include("business_to_business.urls")),
     # path("",include("")),
 ]
