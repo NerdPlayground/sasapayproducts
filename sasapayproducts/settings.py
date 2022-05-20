@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'payment_request',
     'callbackurls',
     'business_to_customer',
+    'business_to_business',
     # '',
 ]
 
