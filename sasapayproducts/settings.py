@@ -132,3 +132,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CLIENT_ID= config("CLIENT_ID")
 CLIENT_SECRET= config("CLIENT_SECRET")
 TOKEN_URL= config("TOKEN_URL")
+HEAD_URL= config("HEAD_URL")

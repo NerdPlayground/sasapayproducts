@@ -1,5 +1,6 @@
 import json
 import requests
+from django.conf import settings
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.generics import GenericAPIView
@@ -29,7 +30,7 @@ class RegisterConfirmationURLAPIView(GenericAPIView):
             }
             
             response= requests.post(
-                "https://api.sasapay.me/api/v1/payments/register-confirmation-url/",
+                "%s/payments/register-confirmation-url/" %settings.HEAD_URL,
                 json=payload,
                 headers=headers
             )
@@ -72,7 +73,7 @@ class RegisterValidationURLAPIView(GenericAPIView):
             }
             
             response= requests.post(
-                "https://api.sasapay.me/api/v1/payments/register-validation-url/",
+                "%s/payments/register-validation-url/" %settings.HEAD_URL,
                 json=payload,
                 headers=headers
             )

@@ -1,5 +1,6 @@
 import json
 import requests
+from django.conf import settings
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.generics import GenericAPIView
@@ -40,7 +41,7 @@ class PhoneNumberRequestPaymentAPIView(GenericAPIView):
             }
             
             response= requests.post(
-                "https://api.sasapay.me/api/v1/payments/request-payment/",
+                "%s/payments/request-payment/" %settings.HEAD_URL,
                 json=payload,
                 headers=headers
             )
@@ -98,7 +99,7 @@ class AliasNumberRequestPaymentAPIView(GenericAPIView):
             }
 
             response= requests.post(
-                "https://api.sasapay.me/api/v1/payments/request-payment-by-alias/",
+                "%s/payments/request-payment-by-alias/" %settings.HEAD_URL,
                 json=payload,
                 headers=headers
             )
@@ -146,7 +147,7 @@ class ProcessPaymentAPIView(GenericAPIView):
             }
 
             response= requests.post(
-                "https://api.sasapay.me/api/v1/payments/process-payment/",
+                "%s/payments/process-payment/" %settings.HEAD_URL,
                 json=payload,
                 headers=headers
             )
