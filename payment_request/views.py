@@ -41,7 +41,7 @@ class PhoneNumberRequestPaymentAPIView(GenericAPIView):
             
             response= requests.post(
                 "https://api.sasapay.me/api/v1/payments/request-payment/",
-                data=payload,
+                json=payload,
                 headers=headers
             )
 
@@ -99,7 +99,7 @@ class AliasNumberRequestPaymentAPIView(GenericAPIView):
 
             response= requests.post(
                 "https://api.sasapay.me/api/v1/payments/request-payment-by-alias/",
-                data=payload,
+                json=payload,
                 headers=headers
             )
             
@@ -147,7 +147,7 @@ class ProcessPaymentAPIView(GenericAPIView):
 
             response= requests.post(
                 "https://api.sasapay.me/api/v1/payments/process-payment/",
-                data=payload,
+                json=payload,
                 headers=headers
             )
 
