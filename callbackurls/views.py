@@ -16,7 +16,7 @@ class RegisterConfirmationURLAPIView(GenericAPIView):
         serializer= RegisterConfirmationURLSerializer(data=data)
         if serializer.is_valid():
             merchant_code= data.get("MerchantCode")
-            confirmation_callback_url= data.get("ConfirmationCallbackURL")
+            confirmation_callback_url= data.get("ConfirmationURL")
 
             client_token= get_client_token()
             headers= {
@@ -25,12 +25,12 @@ class RegisterConfirmationURLAPIView(GenericAPIView):
             
             payload={
                 "MerchantCode": merchant_code,
-                "ConfirmationCallbackURL": confirmation_callback_url,
+                "ConfirmationURL": confirmation_callback_url,
             }
             
             response= requests.post(
-                "https://api.sasapay.me/api/v1/payments/register-ipn-url/",
-                data=payload,
+                "https://api.sasapay.me/api/v1/payments/register-confirmation-url/",
+                json=payload,
                 headers=headers
             )
             
@@ -59,7 +59,7 @@ class RegisterValidationURLAPIView(GenericAPIView):
         serializer= RegisterValidationURLSerializer(data=data)
         if serializer.is_valid():
             merchant_code= data.get("MerchantCode")
-            validation_callback_url= data.get("ValidationCallbackURL")
+            validation_callback_url= data.get("ValidationURL")
 
             client_token= get_client_token()
             headers= {
@@ -68,12 +68,12 @@ class RegisterValidationURLAPIView(GenericAPIView):
             
             payload={
                 "MerchantCode": merchant_code,
-                "ValidationCallbackURL": validation_callback_url,
+                "ValidationURL": validation_callback_url,
             }
             
             response= requests.post(
-                "https://api.sasapay.me/api/v1/payments/register-ipn-url/",
-                data=payload,
+                "https://api.sasapay.me/api/v1/payments/register-validation-url/",
+                json=payload,
                 headers=headers
             )
             
