@@ -48,6 +48,7 @@ class PhoneNumberRequestPaymentAPIView(GenericAPIView):
 
             if response.status_code == 200:
                 response= json.loads(response.text)
+                response["Error Section"]= "None"
                 return Response(
                     response,
                     status=status.HTTP_200_OK

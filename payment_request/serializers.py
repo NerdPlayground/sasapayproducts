@@ -22,5 +22,5 @@ class AliasNumberRequestPaymentSerializer(serializers.Serializer):
 
 class ProcessPaymentSerializer(serializers.Serializer):
     CheckoutRequestID= serializers.CharField()
-    MerchantCode= serializers.IntegerField()
-    VerificationCode= serializers.IntegerField()
+    MerchantCode= serializers.CharField()
+    VerificationCode= serializers.CharField()

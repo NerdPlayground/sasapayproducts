@@ -7,7 +7,7 @@ def get_client_token():
     client_id= settings.CLIENT_ID
     client_secret= settings.CLIENT_SECRET
     token_url= settings.TOKEN_URL
-    response= requests.post(
+    response= requests.get(
         token_url,
         auth=HTTPBasicAuth(client_id,client_secret),
         params={"grant_type":"client_credentials"}
