@@ -18,16 +18,18 @@ class PhoneNumberRequestPaymentAPIView(GenericAPIView):
         data= request.data
         serializer= PhoneNumberRequestPaymentSerializer(data=data)
         if serializer.is_valid():
-            account_reference= data.get("AccountReference")
             merchant_code= data.get("MerchantCode")
+            network_code= data.get("NetworkCode")
             phone_number= data.get("PhoneNumber")
             transaction_desc= data.get("TransactionDesc")
+            account_reference= data.get("AccountReference")
             currency= data.get("Currency")
             amount= data.get("Amount")
             call_back_url= data.get("CallBackURL")
 
             payload={
                 "MerchantCode": merchant_code,
+                "NetworkCode": network_code,
                 "PhoneNumber": phone_number,
                 "TransactionDesc": transaction_desc,
                 "AccountReference": account_reference,
@@ -41,11 +43,11 @@ class PhoneNumberRequestPaymentAPIView(GenericAPIView):
             }
             
             response= requests.post(
-                "%s/payments/request-payment/" %settings.HEAD_URL,
+                "%s" %settings.PAYMENT_REQUEST,
                 json=payload,
                 headers=headers
             )
-
+            
             if response.status_code == 200:
                 response= json.loads(response.text)
                 response["Error Section"]= "None"
@@ -100,7 +102,7 @@ class AliasNumberRequestPaymentAPIView(GenericAPIView):
             }
 
             response= requests.post(
-                "%s/payments/request-payment-by-alias/" %settings.HEAD_URL,
+                "%s" %settings.PAYMENT_REQUEST_ALIAS,
                 json=payload,
                 headers=headers
             )
@@ -148,11 +150,11 @@ class ProcessPaymentAPIView(GenericAPIView):
             }
 
             response= requests.post(
-                "%s/payments/process-payment/" %settings.HEAD_URL,
+                "%s" %settings.PROCESS_PAYMENT,
                 json=payload,
                 headers=headers
             )
-
+            
             if response.status_code == 200:
                 response= json.loads(response.text)
                 return Response(

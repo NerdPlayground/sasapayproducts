@@ -10,4 +10,3 @@ urlpatterns= [
     path("request-payment-alias-number/",AliasNumberRequestPaymentAPIView.as_view(),name="request-payment-alias-number"),
     path("process-payment/",ProcessPaymentAPIView.as_view(),name="process-payment"),
 ]
-# JSONDecodeError at /request-payment-alias-number/

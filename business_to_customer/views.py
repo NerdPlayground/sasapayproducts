@@ -40,7 +40,7 @@ class B2CPaymentsAPIView(GenericAPIView):
             }
             
             response= requests.post(
-                "%s/payments/b2c/" %settings.HEAD_URL,
+                "%s" %settings.PAYMENTS_B2C,
                 json=payload,
                 headers=headers
             )

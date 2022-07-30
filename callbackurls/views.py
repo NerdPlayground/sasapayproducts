@@ -30,7 +30,7 @@ class RegisterConfirmationURLAPIView(GenericAPIView):
             }
             
             response= requests.post(
-                "%s/payments/register-confirmation-url/" %settings.HEAD_URL,
+                "%s" %settings.REGISTER_CONFIRMATION_URL,
                 json=payload,
                 headers=headers
             )
@@ -73,7 +73,7 @@ class RegisterValidationURLAPIView(GenericAPIView):
             }
             
             response= requests.post(
-                "%s/payments/register-validation-url/" %settings.HEAD_URL,
+                "%s" %settings.REGISTER_VALIDATION_URL,
                 json=payload,
                 headers=headers
             )
