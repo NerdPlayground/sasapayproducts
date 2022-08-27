@@ -155,14 +155,14 @@ class ProcessPaymentAPIView(GenericAPIView):
                 headers=headers
             )
             
+            response.raise_for_status()
+            response= json.loads(response.text)
             if response.status_code == 200:
-                response= json.loads(response.text)
                 return Response(
                     response,
                     status=status.HTTP_200_OK
                 )
             else:
-                response= json.loads(response.text)
                 return Response(
                     response,
                     status=status.HTTP_400_BAD_REQUEST
