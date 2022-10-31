@@ -3,7 +3,8 @@ from payment_request.views import (
     ProcessPaymentAPIView,
     PhoneNumberRequestPaymentAPIView,
     AliasNumberRequestPaymentAPIView,
-    TransactionStatusAPIView
+    TransactionStatusAPIView,
+    VerifyTransactionAPIView
 )
 
 urlpatterns= [
@@ -11,4 +12,5 @@ urlpatterns= [
     path("request-payment-alias-number/",AliasNumberRequestPaymentAPIView.as_view(),name="request-payment-alias-number"),
     path("process-payment/",ProcessPaymentAPIView.as_view(),name="process-payment"),
     path("transaction-status/",TransactionStatusAPIView.as_view(),name="transaction-status"),
+    path("verify-transaction/",VerifyTransactionAPIView.as_view(),name="verify-transaction"),
 ]

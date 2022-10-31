@@ -9,7 +9,8 @@ from payment_request.serializers import (
     ProcessPaymentSerializer,
     PhoneNumberRequestPaymentSerializer,
     AliasNumberRequestPaymentSerializer,
-    TransactionStatusSerializer
+    TransactionStatusSerializer,
+    VerifyTransactionSerializer
 )
 
 class PhoneNumberRequestPaymentAPIView(GenericAPIView):
@@ -200,10 +201,6 @@ class TransactionStatusAPIView(GenericAPIView):
                 json=payload,
                 headers=headers
             )
-            
-            print("-"*60)
-            print(json.loads(response.text))
-            print("-"*60)
 
             response.raise_for_status()
             response= json.loads(response.text)
@@ -222,3 +219,44 @@ class TransactionStatusAPIView(GenericAPIView):
                 serializer.errors,
                 status=status.HTTP_400_BAD_REQUEST
             )
+
+class VerifyTransactionAPIView(GenericAPIView):
+    serializer_class= VerifyTransactionSerializer
+
+    def post(self,request):
+        data= request.data
+        serializer= VerifyTransactionSerializer(data=data)
+        if serializer.is_valid():
+            merchant_code= data.get("MerchantCode")
+            transaction_code= data.get("TransactionCode")
+
+            client_token= get_client_token()
+            headers= {
+                "Authorization": "Bearer %s" %client_token["access_token"]
+            }
+
+            payload={
+                "MerchantCode": merchant_code,
+                "TransactionCode": transaction_code,
+            }
+
+            response= requests.post(
+                "%s" %settings.VERIFY_TRANSACTION,
+                json=payload,
+                headers=headers
+            )
+
+            response.raise_for_status()
+            response= json.loads(response.text)
+            if response["status"] == True:
+                return Response(
+                    response,
+                    status=status.HTTP_200_OK
+                )
+            else:
+                return Response(
+                    response,
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+        else:
+            pass
