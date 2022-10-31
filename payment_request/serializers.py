@@ -25,3 +25,7 @@ class ProcessPaymentSerializer(serializers.Serializer):
     CheckoutRequestID= serializers.CharField()
     MerchantCode= serializers.CharField()
     VerificationCode= serializers.CharField()
+
+class TransactionStatusSerializer(serializers.Serializer):
+    MerchantCode= serializers.CharField()
+    CheckoutRequestId= serializers.CharField()

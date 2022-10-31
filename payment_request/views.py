@@ -9,6 +9,7 @@ from payment_request.serializers import (
     ProcessPaymentSerializer,
     PhoneNumberRequestPaymentSerializer,
     AliasNumberRequestPaymentSerializer,
+    TransactionStatusSerializer
 )
 
 class PhoneNumberRequestPaymentAPIView(GenericAPIView):
@@ -168,6 +169,54 @@ class ProcessPaymentAPIView(GenericAPIView):
                     status=status.HTTP_400_BAD_REQUEST
                 )
 
+        else:
+            return Response(
+                serializer.errors,
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+class TransactionStatusAPIView(GenericAPIView):
+    serializer_class= TransactionStatusSerializer
+
+    def post(self,request):
+        data= request.data
+        serializer= TransactionStatusSerializer(data=data)
+        if serializer.is_valid():
+            merchant_code= data.get("MerchantCode")
+            checkout_request_id= data.get("CheckoutRequestId")
+            
+            client_token= get_client_token()
+            headers= {
+                "Authorization": "Bearer %s" %client_token["access_token"]
+            }
+
+            payload={
+                "MerchantCode": merchant_code,
+                "CheckoutRequestId": checkout_request_id,
+            }
+
+            response= requests.post(
+                "%s" %settings.TRANSACTION_STATUS,
+                json=payload,
+                headers=headers
+            )
+            
+            print("-"*60)
+            print(json.loads(response.text))
+            print("-"*60)
+
+            response.raise_for_status()
+            response= json.loads(response.text)
+            if response["status"] == True:
+                return Response(
+                    response,
+                    status=status.HTTP_200_OK
+                )
+            else:
+                return Response(
+                    response,
+                    status=status.HTTP_200_OK
+                )
         else:
             return Response(
                 serializer.errors,
